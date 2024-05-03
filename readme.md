@@ -1,3 +1,7 @@
+Notes for next session:
+"move" is not defined at makeMove() because I added a for loop for invalid input check and the scope stays within the for loop. Need to find a way to input check and send out the move value.
+
+
 To-do List:
 -Store the gameboard as an array inside of a Gameboard object
 -Players are also going to be stored in objects
