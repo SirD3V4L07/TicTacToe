@@ -11,5 +11,21 @@ To-do List:
 -Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that shows the results upon game end!
 
 
-To-do List:
-1) Create functioning tic tac toe in console without closures or anything fancy
+Logic Structure:
+-Draw empty board
+-Player selects a sign
+-Coin toss to see who goes first
+-playerTurn is true or false depending on coin toss
+-Call makeMove(playerTurn)
+-makeMove will start with a turn check to evaluate who's turn to play
+-if player, a coordinate will be requested for the play, if COM, COM will generate a random play
+-The end of makeMove always reverses the boolean value of playerTurn
+-Repeat makeMove until winner != ""
+-In each iteration of makeMove, coordinates are checked for empty before playing
+-In each iteration of Play, victory condition and check for winner
+
+Functions:
+Game()
+Play()
+makeMove()
+checkWinner()
