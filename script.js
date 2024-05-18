@@ -1,5 +1,6 @@
 function Game() {
     let winner = "";
+    let turns = 1;
     let Gameboard = {
         "1a":"-",
         "1b":"-",
@@ -27,7 +28,7 @@ function Game() {
         `);
     };
 
-    drawGameboard();
+    
 
     const player = prompt("Choose your player sign.");
     const computer = "C";
@@ -50,6 +51,7 @@ function Game() {
     let playerTurn = coinToss();
 
     function play() {
+        drawGameboard();
         do {
             console.log("Going to makeMove()..");
             makeMove();
@@ -58,6 +60,9 @@ function Game() {
             console.log("Going to checkWinner()..");
             checkWinner();
             playerTurn = !playerTurn;
+            console.log("Player turn: " + playerTurn);
+            turns += 1;
+            console.log("Turn: " + turns);
         } while (winner == "");
     }
 
@@ -77,87 +82,61 @@ function Game() {
                 }
             }            
             
-            let subject = player;
-            switch (move) {
-                case "1a": if (Gameboard["1a"] != "") {
-                    Gameboard["1a"] = subject;
-                };
-                break;
-                case "1b": if (Gameboard["1b"] != "") {
-                    Gameboard["1b"] = subject;
-                };
-                break;
-                case "1c": if (Gameboard["1c"] != "") {
-                    Gameboard["1c"] = subject;
-                };
-                break;
-                case "2a": if (Gameboard["2a"] != "") {
-                    Gameboard["2a"] = subject;
-                };
-                break;
-                case "2b": if (Gameboard["2b"] != "") {
-                    Gameboard["2b"] = subject;
-                };
-                break;
-                case "2c": if (Gameboard["2c"] != "") {
-                    Gameboard["2c"] = subject;
-                };
-                break;
-                case "3a": if (Gameboard["3a"] != "") {
-                    Gameboard["3a"] = subject;
-                };
-                break;
-                case "3b": if (Gameboard["3b"] != "") {
-                    Gameboard["3b"] = subject;
-                };
-                break;
-                case "3c": if (Gameboard["3c"] != "") {
-                    Gameboard["3c"] = subject;
-                };
-                break;
-            }
-        } else {
-            let move = Math.ceil(Math.random() * 9);
-            let subject = computer;
-            console.log("Generating COM move..");
-            switch (move) {
-                case 1: if (Gameboard["1a"] != "") {
-                    Gameboard["1a"] = subject;
-                };
-                break;
-                case 2: if (Gameboard["1b"] != "") {
-                    Gameboard["1b"] = subject;
-                };
-                break;
-                case 3: if (Gameboard["1c"] != "") {
-                    Gameboard["1c"] = subject;
-                };
-                break;
-                case 4: if (Gameboard["2a"] != "") {
-                    Gameboard["2a"] = subject;
-                };
-                break;
-                case 5: if (Gameboard["2b"] != "") {
-                    Gameboard["2b"] = subject;
-                };
-                break;
-                case 6: if (Gameboard["2c"] != "") {
-                    Gameboard["2c"] = subject;
-                };
-                break;
-                case 7: if (Gameboard["3a"] != "") {
-                    Gameboard["3a"] = subject;
-                };
-                break;
-                case 8: if (Gameboard["3b"] != "") {
-                    Gameboard["3b"] = subject;
-                };
-                break;
-                case 9: if (Gameboard["3c"] != "") {
-                    Gameboard["3c"] = subject;
-                };
-                break;
-            }
+        } 
+        else {
+            let moveStatus = "";
+            do { 
+                let move = Math.ceil(Math.random() * 9);
+                let subject = computer;
+                console.log("Generating COM move..");
+                switch (move) {
+                    case 1: if (Gameboard["1a"] == "-") {
+                        Gameboard["1a"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                    case 2: if (Gameboard["1b"] == "-") {
+                        Gameboard["1b"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                    case 3: if (Gameboard["1c"] == "-") {
+                        Gameboard["1c"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                    case 4: if (Gameboard["2a"] == "-") {
+                        Gameboard["2a"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                    case 5: if (Gameboard["2b"] == "-") {
+                        Gameboard["2b"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                    case 6: if (Gameboard["2c"] == "-") {
+                        Gameboard["2c"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                    case 7: if (Gameboard["3a"] == "-") {
+                        Gameboard["3a"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                    case 8: if (Gameboard["3b"] == "-") {
+                        Gameboard["3b"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                    case 9: if (Gameboard["3c"] == "-") {
+                        Gameboard["3c"] = subject;
+                        moveStatus = "done";
+                    };
+                    break;
+                }
+            } while (moveStatus != "done");
         }
 
         
@@ -179,6 +158,11 @@ function Game() {
                 } else {
                     winner = computer;
                 }
+            } else {
+                if (turns >= 9) {
+                    console.log("It's a draw!");
+                    winner = "None";
+                }                
             }
             return winner;
     }

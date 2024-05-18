@@ -1,5 +1,10 @@
 Notes for next session:
-"move" is not defined at makeMove() because I added a for loop for invalid input check and the scope stays within the for loop. Need to find a way to input check and send out the move value.
+Made some changes but running into another problem now. I meddled with the makeMove() function
+and apparently the move prompt keeps triggering asking me for a move, but nothing displays on
+the console. Probably running into some sort of infinite loop. The culprit is almost
+surely the makeMove() function, as that's what I last changed before I ran into the problem while
+trying to fix another issue. Namely, the fact the computer move is disregarded if the random
+number doesn't find an empty space on its first try.
 
 
 To-do List:
