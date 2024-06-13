@@ -1,10 +1,11 @@
 Notes for next session:
-Made some changes but running into another problem now. I meddled with the makeMove() function
-and apparently the move prompt keeps triggering asking me for a move, but nothing displays on
-the console. Probably running into some sort of infinite loop. The culprit is almost
-surely the makeMove() function, as that's what I last changed before I ran into the problem while
-trying to fix another issue. Namely, the fact the computer move is disregarded if the random
-number doesn't find an empty space on its first try.
+
+
+Requirements:
+-Use block scoping. (let and const are scoped inside the closest curly brackets)
+-Use closures (Use functions as objects with subfunctions that act as methods in order to prevent access to variables inside the functions, while still being able to use the variables for their intended purpose)
+-Use factory functions (unlike Constructor functions, Factory functions use Return to create a method inside the function as an object, and therefore don't use the prototype. By using factory functions you're basically already using closures and block scoping)
+-IIFE (immediately invoked function expression). Basically, for functions that only run once, run them as they're declared.
 
 
 To-do List:
@@ -20,21 +21,31 @@ To-do List:
 -Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that shows the results upon game end!
 
 
-Logic Structure:
--Draw empty board
--Player selects a sign
--Coin toss to see who goes first
--playerTurn is true or false depending on coin toss
--Call makeMove(playerTurn)
--makeMove will start with a turn check to evaluate who's turn to play
--if player, a coordinate will be requested for the play, if COM, COM will generate a random play
--The end of makeMove always reverses the boolean value of playerTurn
--Repeat makeMove until winner != ""
--In each iteration of makeMove, coordinates are checked for empty before playing
--In each iteration of Play, victory condition and check for winner
 
-Functions:
-Game()
-Play()
-makeMove()
-checkWinner()
+/**
+ * 
+ * Objects:: 
+ * -Gameboard:
+ *      *Cell 1 = ""
+ *      *Cell 2 = ""
+ *      *Cell 3 = ""
+ *      *Cell 4 = ""
+ *      *Cell 5 = ""
+ *      *Cell 6 = ""
+ *      *Cell 7 = ""
+ *      *Cell 8 = ""
+ *      *Cell 9 = ""
+ * -Player:
+ *      *Mark: ""
+ *      *Name: ""
+ * -Game:
+ *      *makeMove
+ *      *drawGameboard
+ *      *checkVictor
+ *      *checkEmpty
+ *      *selectCharacter
+ *      *decideFirst
+ *      *roundCount
+ *      *matchCount
+ *      
+ */
