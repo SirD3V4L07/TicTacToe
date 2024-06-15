@@ -21,7 +21,6 @@ To-do List:
 -Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that shows the results upon game end!
 
 
-
 /**
  * 
  * Objects:: 

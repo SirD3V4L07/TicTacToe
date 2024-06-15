@@ -16,7 +16,8 @@
  *      *Name: ""
  * -Game:
  *      *makeMove
- *      *drawGameboard
+ *      *drawGameboard===
+ *      *getBoard===
  *      *checkVictor
  *      *checkEmpty
  *      *selectCharacter
@@ -27,19 +28,31 @@
  */
 
 const Gameboard = (function(){
-    return {
-        cell1:"",
-        cell2:"",
-        cell3:"",
-        cell4:"",
-        cell5:"",
-        cell6:"",
-        cell7:"",
-        cell8:"",
-        cell9:"",
+    let board = [" "," "," "," "," "," "," "," "," "];
+
+    const getBoard = () => board;
+
+    const drawGameboard = () => {
+        console.log(` ${board[0]}  |  ${board[1]}  |  ${board[2]} `);
+        console.log(`---------------`);
+        console.log(` ${board[3]}  |  ${board[4]}  |  ${board[5]} `);
+        console.log(`---------------`);
+        console.log(` ${board[6]}  |  ${board[7]}  |  ${board[8]} `);
     }
+
+    return {getBoard, drawGameboard}
+
 })();
 
 const Player = function(mark,name) {
-    
+    return {
+        mark: mark,
+        name: name,
+    }
 }
+
+const Game = (function(){
+    return {
+        
+    }
+})();
