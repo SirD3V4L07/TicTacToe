@@ -1,19 +1,19 @@
 /**
  * 
  * Objects:: 
- * -Gameboard:
- *      *Cell 1 = ""
- *      *Cell 2 = ""
- *      *Cell 3 = ""
- *      *Cell 4 = ""
- *      *Cell 5 = ""
- *      *Cell 6 = ""
- *      *Cell 7 = ""
- *      *Cell 8 = ""
- *      *Cell 9 = ""
- * -Player:
- *      *Mark: ""
- *      *Name: ""
+ * -Gameboard: ===
+ *      *Cell 1 = "" ===
+ *      *Cell 2 = "" ===
+ *      *Cell 3 = "" ===
+ *      *Cell 4 = "" ===
+ *      *Cell 5 = "" ===
+ *      *Cell 6 = "" ===
+ *      *Cell 7 = "" ===
+ *      *Cell 8 = "" ===
+ *      *Cell 9 = "" ===
+ * -Player:  ===
+ *      *Mark: "" ===
+ *      *Name: "" ===
  * -Game:
  *      *makeMove
  *      *drawGameboard===
@@ -24,6 +24,8 @@
  *      *decideFirst
  *      *roundCount
  *      *matchCount
+ *      *turnController
+ *      *createPlayer===
  *      
  */
 
@@ -44,15 +46,46 @@ const Gameboard = (function(){
 
 })();
 
-const Player = function(mark,name) {
+const Player = function(name,mark) {
     return {
-        mark: mark,
         name: name,
+        mark: mark,        
     }
 }
 
 const Game = (function(){
-    return {
-        
+    console.log("Triggered Game() function");
+    /**
+     * Create Player One
+     */
+    const playerOne = Player(
+        prompt("What's your name?"),
+        prompt("What mark would you like to use?")
+    );
+
+    /**
+     * Create COM opponent
+     */
+    const playerCOM = Player("COM", "C");
+
+    const makeMove = () => {
+
     }
+
+    const turnController = () => {
+
+    }
+
+    const decideFirst = () => {
+        let randomizer = Math.random();
+        if (randomizer > 0.5) {
+            return playerOne;
+        } else {
+            return playerCOM;
+        }
+    }
+
+    
+    return {decideFirst};
 })();
+
