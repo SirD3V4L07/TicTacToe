@@ -15,17 +15,17 @@
  *      *Mark: "" ===
  *      *Name: "" ===
  * -Game:
- *      *makeMove
+ *      *createPlayer===
  *      *drawGameboard===
  *      *getBoard===
+ *      *selectCharacter===
+ *      *decideFirst===
  *      *checkVictor
- *      *checkEmpty
- *      *selectCharacter
- *      *decideFirst
+ *      *checkEmpty   
  *      *roundCount
  *      *matchCount
  *      *turnController
- *      *createPlayer===
+ *      *makeMove
  *      
  */
 
@@ -54,7 +54,9 @@ const Player = function(name,mark) {
 }
 
 const Game = (function(){
+    let playerTurn = false;
     console.log("Triggered Game() function");
+
     /**
      * Create Player One
      */
@@ -68,21 +70,25 @@ const Game = (function(){
      */
     const playerCOM = Player("COM", "C");
 
+    /**
+     * Decide who plays first
+     */
+    const decideFirst = (() => {
+        let randomizer = Math.random();
+        if (randomizer > 0.5) {
+            playerTurn = true;;
+        } else {
+            playerTurn = false;
+        }
+        return playerTurn;
+    })();
+
     const makeMove = () => {
 
     }
 
     const turnController = () => {
 
-    }
-
-    const decideFirst = () => {
-        let randomizer = Math.random();
-        if (randomizer > 0.5) {
-            return playerOne;
-        } else {
-            return playerCOM;
-        }
     }
 
     
