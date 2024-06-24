@@ -76,7 +76,7 @@ const Game = (function(){
     const decideFirst = (() => {
         let randomizer = Math.random();
         if (randomizer > 0.5) {
-            playerTurn = true;;
+            playerTurn = true;
         } else {
             playerTurn = false;
         }
@@ -84,8 +84,44 @@ const Game = (function(){
     })();
 
     const makeMove = () => {
-
+            /**
+             * Check turn
+             * Make move if COM
+             * Ask move if Player
+             * Check empty cell
+             * Draw the board with new move
+             * Swap turn controller
+             * Check victor
+             */
+            if (playerTurn == false) {
+                let comPlay = "";
+                while(comPlay != "done") {
+                    comPlay = Math.floor(Math.random()*9);
+                    if (board[comPlay] == " ") {
+                        board[comPlay] = playerCOM.mark;
+                        comPlay = "done";
+                    }
+                }
+                playerTurn = !playerTurn;
+            } 
+            else if (playerTurn == true) {
+                let playerPlay = "";
+                while(playerPlay != "done") {
+                    playerPlay = prompt("Choose where to play (1 to 9)");
+                    if (board[playerPlay - 1] == " ") {
+                        board[playerPlay - 1] = playerOne.mark;
+                        playerPlay = "done";
+                    } 
+                    else {
+                        alert("That square is already taken!");
+                    }
+                }
+                playerTurn = !playerTurn;
+            }
+            drawGameboard();
     }
+
+    
 
     const turnController = () => {
 
