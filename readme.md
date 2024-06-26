@@ -1,4 +1,4 @@
-Notes for next session:
+Notes for next session: Next step is to add play count to makeMove() to check for 9 plays, if no winner, run endMatch(draw), to declare a draw. endMatch will also print winner and draw messages, and count rounds and match count.
 
 
 Requirements:

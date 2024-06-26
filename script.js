@@ -21,11 +21,9 @@
  *      *selectCharacter===
  *      *decideFirst===
  *      *checkVictor
- *      *checkEmpty   
  *      *roundCount
  *      *matchCount
- *      *turnController
- *      *makeMove
+ *      *makeMove===
  *      
  */
 
@@ -83,16 +81,10 @@ const Game = (function(){
         return playerTurn;
     })();
 
+    /**
+     * Make move
+     */
     const makeMove = () => {
-            /**
-             * Check turn
-             * Make move if COM
-             * Ask move if Player
-             * Check empty cell
-             * Draw the board with new move
-             * Swap turn controller
-             * Check victor
-             */
             if (playerTurn == false) {
                 let comPlay = "";
                 while(comPlay != "done") {
@@ -102,6 +94,9 @@ const Game = (function(){
                         comPlay = "done";
                     }
                 }
+                if (checkVictor(playerCOM.mark)) {
+                    endMatch(playerCOM.name);
+                };
                 playerTurn = !playerTurn;
             } 
             else if (playerTurn == true) {
@@ -116,18 +111,41 @@ const Game = (function(){
                         alert("That square is already taken!");
                     }
                 }
+                if (checkVictor(playerOne.mark)) {
+                    endMatch(playerOne.name);
+                };
                 playerTurn = !playerTurn;
             }
             drawGameboard();
     }
 
-    
+    /**
+     * Check for a winner
+     */
+    const checkVictor = (marker) => {
+        
+        const winningCombinations = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
 
-    const turnController = () => {
+        for (let combination of winningCombinations) {
+            const [a, b, c] = combination;
+            if (getBoard[a] === marker && getBoard[b] === marker && getBoard[c] === marker) {
+                return true;
+            }
+        }
+        return false;
 
     }
 
     
-    return {decideFirst};
+    return {makeMove};
 })();
 
