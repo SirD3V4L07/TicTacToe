@@ -53,6 +53,9 @@ const Player = function(name,mark) {
 
 const Game = (function(){
     let playerTurn = false;
+    let roundCount = 1;
+    let matchCount = 1;
+    let playCount = 0;
     console.log("Triggered Game() function");
 
     /**
@@ -116,7 +119,11 @@ const Game = (function(){
                 };
                 playerTurn = !playerTurn;
             }
+            playCount += 1;
             drawGameboard();
+            if (playCount > 8) {
+                endMatch("draw");
+            }
     }
 
     /**
@@ -145,6 +152,28 @@ const Game = (function(){
 
     }
 
+    /**
+     * End match and attribute scores 
+     */
+    const endMatch = (verdict) => {
+
+        switch (verdict) {
+            case "draw": 
+                console.log("It's a draw!");
+                roundCount += 1;
+                break;
+            case playerOne.name: 
+                console.log(playerOne.name + " wins!");
+                roundCount += 1;
+                playCount = 0;
+                break;
+            case playerCOM.name: 
+                console.log("You lose..");
+                roundCount += 1;
+                playCount = 0;
+                break;
+        }
+    }
     
     return {makeMove};
 })();
