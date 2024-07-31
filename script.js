@@ -27,6 +27,11 @@
  *      
  */
 
+
+
+/**
+ * Gameboard IIFE
+ */
 const Gameboard = (function(){
     let board = [" "," "," "," "," "," "," "," "," "];
 
@@ -44,6 +49,9 @@ const Gameboard = (function(){
 
 })();
 
+/**
+ * Player Object
+ */
 const Player = function(name,mark) {
     return {
         name: name,
@@ -51,10 +59,13 @@ const Player = function(name,mark) {
     }
 }
 
+
+/**
+ * Game IIFE ========================================================================== <
+ * A Game is an instance which begins by asking for the player name. 
+ */
 const Game = (function(){
     let playerTurn = false;
-    let roundCount = 1;
-    let matchCount = 1;
     let playCount = 0;
     console.log("Triggered Game() function");
 
@@ -71,23 +82,38 @@ const Game = (function(){
      */
     const playerCOM = Player("COM", "C");
 
-    /**
-     * Decide who plays first
-     */
-    const decideFirst = (() => {
-        let randomizer = Math.random();
-        if (randomizer > 0.5) {
-            playerTurn = true;
-        } else {
-            playerTurn = false;
-        }
-        return playerTurn;
-    })();
 
     /**
-     * Make move
+     * Match Function IIFE
      */
-    const makeMove = () => {
+    const Match = (() => {
+        /**
+        * Decide who plays first (IIFE)
+        */
+        const decideFirst = (() => {
+            let randomizer = Math.random();
+            if (randomizer > 0.5) {
+                playerTurn = true;
+                console.log(playerOne.name + " will go first!")
+            } else {
+                playerTurn = false;
+                console.log(playerCOM.name + " will go first!")
+            }
+            
+            return playerTurn;
+        })();
+
+        
+    })();
+
+
+
+    /**
+     * Make move (IIFE)
+     */
+    const makeMoves = (() => {
+        console.log("entered makemove playerTurn = " + playerTurn);
+        for (let i = 0; i < 9; i++) {
             if (playerTurn == false) {
                 let comPlay = "";
                 while(comPlay != "done") {
@@ -99,6 +125,7 @@ const Game = (function(){
                 }
                 if (checkVictor(playerCOM.mark)) {
                     endMatch(playerCOM.name);
+                    return;
                 };
                 playerTurn = !playerTurn;
             } 
@@ -116,15 +143,13 @@ const Game = (function(){
                 }
                 if (checkVictor(playerOne.mark)) {
                     endMatch(playerOne.name);
+                    return;
                 };
                 playerTurn = !playerTurn;
             }
-            playCount += 1;
-            drawGameboard();
-            if (playCount > 8) {
-                endMatch("draw");
-            }
-    }
+        }
+        endMatch("draw");    
+    })();
 
     /**
      * Check for a winner
@@ -143,7 +168,7 @@ const Game = (function(){
         ];
 
         for (let combination of winningCombinations) {
-            const [a, b, c] = combination;
+            const [a, b, c] = combination;    
             if (getBoard[a] === marker && getBoard[b] === marker && getBoard[c] === marker) {
                 return true;
             }
@@ -160,21 +185,20 @@ const Game = (function(){
         switch (verdict) {
             case "draw": 
                 console.log("It's a draw!");
-                roundCount += 1;
                 break;
             case playerOne.name: 
                 console.log(playerOne.name + " wins!");
-                roundCount += 1;
                 playCount = 0;
                 break;
             case playerCOM.name: 
                 console.log("You lose..");
-                roundCount += 1;
                 playCount = 0;
                 break;
         }
     }
     
-    return {makeMove};
+    return {makeMoves};
 })();
-
+/**
+ * Game IIFE ========================================================================== >
+ */

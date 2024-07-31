@@ -1,4 +1,5 @@
-Notes for next session: Next step is to add play count to makeMove() to check for 9 plays, if no winner, run endMatch(draw), to declare a draw. endMatch will also print winner and draw messages, and count rounds and match count.
+Notes for next session: Gave up on the rounds and matches idea. Let's make ONE match, and just restart the game each time. Simple first, then improve from there. I also turned makeMove into makeMoves, which now has the loop that cycles through 9 plays until a winner or draw is found. Currently left off at an error where "board" is not defined at line 121. The makeMoves function probably can't access it and I need to pass it in.
+
 
 
 Requirements:
