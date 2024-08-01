@@ -1,73 +1,58 @@
-/**
- * 
- * Objects:: 
- * -Gameboard: ===
- *      *Cell 1 = "" ===
- *      *Cell 2 = "" ===
- *      *Cell 3 = "" ===
- *      *Cell 4 = "" ===
- *      *Cell 5 = "" ===
- *      *Cell 6 = "" ===
- *      *Cell 7 = "" ===
- *      *Cell 8 = "" ===
- *      *Cell 9 = "" ===
- * -Player:  ===
- *      *Mark: "" ===
- *      *Name: "" ===
- * -Game:
- *      *createPlayer===
- *      *drawGameboard===
- *      *getBoard===
- *      *selectCharacter===
- *      *decideFirst===
- *      *checkVictor
- *      *roundCount
- *      *matchCount
- *      *makeMove===
- *      
- */
-
 
 
 /**
  * Gameboard IIFE
  */
-const Gameboard = (function(){
-    let board = [" "," "," "," "," "," "," "," "," "];
+const Gameboard = (function() {
+    let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
 
     const getBoard = () => board;
 
     const drawGameboard = () => {
+        console.log(` ======================== `);
+        console.log(` `);
+        console.log(` `);
         console.log(` ${board[0]}  |  ${board[1]}  |  ${board[2]} `);
         console.log(`---------------`);
         console.log(` ${board[3]}  |  ${board[4]}  |  ${board[5]} `);
         console.log(`---------------`);
         console.log(` ${board[6]}  |  ${board[7]}  |  ${board[8]} `);
-    }
+        console.log(` `);
+        console.log(` `);
+        console.log(` ======================== `);
+    };
 
-    return {getBoard, drawGameboard}
+    const resetBoard = () => {
+        board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+    };
 
+    const makeMove = (index, mark) => {
+        if (board[index] === " ") {
+            board[index] = mark;
+            return true;
+        }
+        return false;
+    };
+
+    return { getBoard, drawGameboard, makeMove, resetBoard };
 })();
 
 /**
  * Player Object
  */
-const Player = function(name,mark) {
+const Player = function(name, mark) {
     return {
         name: name,
-        mark: mark,        
-    }
-}
-
+        mark: mark,
+    };
+};
 
 /**
- * Game IIFE ========================================================================== <
- * A Game is an instance which begins by asking for the player name. 
+ * Game IIFE
  */
-const Game = (function(){
+const Game = (function() {
     let playerTurn = false;
     let playCount = 0;
-    console.log("Triggered Game() function");
 
     /**
      * Create Player One
@@ -82,82 +67,68 @@ const Game = (function(){
      */
     const playerCOM = Player("COM", "C");
 
+    /**
+     * Decide who plays first
+     */
+    const decideFirst = () => {
+        let randomizer = Math.random();
+        if (randomizer > 0.5) {
+            playerTurn = true;
+            console.log(playerOne.name + " will go first!");
+        } else {
+            playerTurn = false;
+            console.log(playerCOM.name + " will go first!");
+        }
+        return playerTurn;
+    };
 
     /**
-     * Match Function IIFE
+     * Main game loop
      */
-    const Match = (() => {
-        /**
-        * Decide who plays first (IIFE)
-        */
-        const decideFirst = (() => {
-            let randomizer = Math.random();
-            if (randomizer > 0.5) {
-                playerTurn = true;
-                console.log(playerOne.name + " will go first!")
+    const startGame = () => {
+        Gameboard.resetBoard();
+        decideFirst();
+        playCount = 0;
+        while (playCount < 9) {
+            Gameboard.drawGameboard();
+            if (playerTurn) {
+                let playerPlay = "";
+                while (playerPlay !== "done") {
+                    let index = prompt("Choose where to play (1 to 9)") - 1;
+                    if (index >= 0 && index < 9 && Gameboard.makeMove(index, playerOne.mark)) {
+                        playerPlay = "done";
+                    } else {
+                        alert("That square is already taken or invalid!");
+                    }
+                }
+                if (checkVictor(playerOne.mark)) {
+                    endMatch(playerOne.name);
+                    return;
+                }
             } else {
-                playerTurn = false;
-                console.log(playerCOM.name + " will go first!")
-            }
-            
-            return playerTurn;
-        })();
-
-        
-    })();
-
-
-
-    /**
-     * Make move (IIFE)
-     */
-    const makeMoves = (() => {
-        console.log("entered makemove playerTurn = " + playerTurn);
-        for (let i = 0; i < 9; i++) {
-            if (playerTurn == false) {
                 let comPlay = "";
-                while(comPlay != "done") {
-                    comPlay = Math.floor(Math.random()*9);
-                    if (Gameboard.getBoard()[comPlay] == " ") {
-                        console.log(Gameboard.getBoard[comPlay]);
-                        Gameboard.getBoard()[comPlay] = playerCOM.mark;
+                while (comPlay !== "done") {
+                    let index = Math.floor(Math.random() * 9);
+                    if (Gameboard.makeMove(index, playerCOM.mark)) {
                         comPlay = "done";
                     }
                 }
                 if (checkVictor(playerCOM.mark)) {
                     endMatch(playerCOM.name);
                     return;
-                };
-                playerTurn = !playerTurn;
-            } 
-            else if (playerTurn == true) {
-                let playerPlay = "";
-                while(playerPlay != "done") {
-                    playerPlay = prompt("Choose where to play (1 to 9)");
-                    if (Gameboard.getBoard()[playerPlay - 1] == " ") {
-                        console.log(Gameboard.getBoard()[playerPlay]);
-                        Gameboard.getBoard()[playerPlay - 1] = playerOne.mark;
-                        playerPlay = "done";
-                    } 
-                    else if (Gameboard.getBoard[playerPlay] != null && Gameboard.getBoard[playerPlay] != undefined) {
-                        alert("That square is already taken!");
-                    }
                 }
-                if (checkVictor(playerOne.mark)) {
-                    endMatch(playerOne.name);
-                    return;
-                };
-                playerTurn = !playerTurn;
             }
+            playerTurn = !playerTurn;
+            playCount++;
         }
-        endMatch("draw");    
-    })();
+        endMatch("draw");
+    };
 
     /**
      * Check for a winner
      */
     const checkVictor = (marker) => {
-        
+        const board = Gameboard.getBoard();
         const winningCombinations = [
             [0, 1, 2],
             [3, 4, 5],
@@ -170,37 +141,38 @@ const Game = (function(){
         ];
 
         for (let combination of winningCombinations) {
-            const [a, b, c] = combination;    
-            if (getBoard[a] === marker && getBoard[b] === marker && getBoard[c] === marker) {
+            const [a, b, c] = combination;
+            if (board[a] === marker && board[b] === marker && board[c] === marker) {
                 return true;
             }
         }
         return false;
-
-    }
+    };
 
     /**
-     * End match and attribute scores 
+     * End match and attribute scores
      */
     const endMatch = (verdict) => {
-
+        Gameboard.drawGameboard();
         switch (verdict) {
-            case "draw": 
+            case "draw":
                 console.log("It's a draw!");
                 break;
-            case playerOne.name: 
+            case playerOne.name:
                 console.log(playerOne.name + " wins!");
-                playCount = 0;
                 break;
-            case playerCOM.name: 
+            case playerCOM.name:
                 console.log("You lose..");
-                playCount = 0;
                 break;
         }
-    }
-    
-    return {makeMoves};
+        playCount = 0;
+        // Optionally prompt to start a new game
+        if (confirm("Do you want to play again?")) {
+            startGame();
+        }
+    };
+
+    return { startGame };
 })();
-/**
- * Game IIFE ========================================================================== >
- */
+
+Game.startGame();
