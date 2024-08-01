@@ -118,8 +118,9 @@ const Game = (function(){
                 let comPlay = "";
                 while(comPlay != "done") {
                     comPlay = Math.floor(Math.random()*9);
-                    if (board[comPlay] == " ") {
-                        board[comPlay] = playerCOM.mark;
+                    if (Gameboard.getBoard()[comPlay] == " ") {
+                        console.log(Gameboard.getBoard[comPlay]);
+                        Gameboard.getBoard()[comPlay] = playerCOM.mark;
                         comPlay = "done";
                     }
                 }
@@ -133,11 +134,12 @@ const Game = (function(){
                 let playerPlay = "";
                 while(playerPlay != "done") {
                     playerPlay = prompt("Choose where to play (1 to 9)");
-                    if (board[playerPlay - 1] == " ") {
-                        board[playerPlay - 1] = playerOne.mark;
+                    if (Gameboard.getBoard()[playerPlay - 1] == " ") {
+                        console.log(Gameboard.getBoard()[playerPlay]);
+                        Gameboard.getBoard()[playerPlay - 1] = playerOne.mark;
                         playerPlay = "done";
                     } 
-                    else {
+                    else if (Gameboard.getBoard[playerPlay] != null && Gameboard.getBoard[playerPlay] != undefined) {
                         alert("That square is already taken!");
                     }
                 }
