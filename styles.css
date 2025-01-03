@@ -1,0 +1,49 @@
+body {
+    background: rgb(197,249,215);
+    background: linear-gradient(180deg, rgba(197,249,215,1) 24%, rgba(247,212,134,1) 45%, rgba(242,122,125,1) 65%);
+    width:98vw;
+    height:98vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+#title {
+    margin:0;
+    font-family: "Zen Dots", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 4rem;
+    color:rgb(255 255 255 / 60%);
+    -webkit-text-stroke: 2px rgb(20, 20, 20);
+}
+
+.game-container {
+    
+    filter: drop-shadow(20px 20px 4px #31273f7a);
+    width:calc(20% + 100px);
+    height:calc(40% + 100px);
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.cell {
+    background-color: #f7f779;
+    width:1fr;
+    height:1fr;
+    border:3px solid #444;
+    box-shadow: inset -5px 6px 9px 6px rgba(255, 254, 254, 0.336);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Zen Dots", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 4rem;
+    color:rgb(255, 255, 255);
+    -webkit-text-stroke: 2px rgb(20, 20, 20);
+}
