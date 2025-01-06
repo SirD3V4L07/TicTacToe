@@ -46,4 +46,5 @@ body {
     font-size: 4rem;
     color:rgb(255, 255, 255);
     -webkit-text-stroke: 2px rgb(20, 20, 20);
+    cursor:pointer;
 }
