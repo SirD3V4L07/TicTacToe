@@ -9,6 +9,6 @@ let playerSign = "N/A";
             cell.addEventListener('click', () => {
                 cell.innerHTML = "X";
             })
-        }
+        };
     }
 )();
