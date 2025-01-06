@@ -1,8 +1,14 @@
-console.log("Hello world 2");
+console.log("Hello world 3");
+
+let playerSign = "N/A";
 
 (
-    function test() {
-        const cell1 = document.querySelector("#cell1");
-        cell1.innerHTML = "0";
+    function changeCells() {
+        const cells = document.querySelectorAll(".cell");
+        cells.forEach(cell, index) => {
+            cell.addEventListener('click', () => {
+                cell.innerHTML = "X";
+            })
+        }
     }
 )();
