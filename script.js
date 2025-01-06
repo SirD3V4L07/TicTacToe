@@ -10,5 +10,5 @@ let playerSign = "N/A";
                 cell.innerHTML = "X";
             })
         };
-    }
+    };
 )();
