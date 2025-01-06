@@ -2,7 +2,7 @@ console.log("Hello world 2");
 
 (
     function test() {
-        const cell = document.querySelectorAll(".cell");
-        cell.forEach.innerHTML = "0";
+        const cell1 = document.querySelector("#cell1");
+        cell1.innerHTML = "0";
     }
 )();
