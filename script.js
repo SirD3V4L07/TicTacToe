@@ -1,8 +1,8 @@
-console.log("Hello world");
+console.log("Hello world 2");
 
 (
     function test() {
-        const cell = document.querySelector(".cell");
-        cell.innerHTML = "0";
+        const cell = document.querySelectorAll(".cell");
+        cell.forEach.innerHTML = "0";
     }
 )();
