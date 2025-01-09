@@ -9,10 +9,12 @@ function changeCells(playerSign) {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell, index) => {
         cell.addEventListener('click', () => {
-            cell.innerHTML = playerSign;
+            board[index] = playerSign;
+            cell.innerHTML = board[index];
         });
     });
 };
 
 /**Main Body */
 changeCells(playerSign);
+
