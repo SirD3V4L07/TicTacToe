@@ -11,6 +11,7 @@ function changeCells(playerSign) {
         cell.addEventListener('click', () => {
             board[index] = playerSign;
             cell.innerHTML = board[index];
+            console.log(board[index]);
         });
     });
 };
