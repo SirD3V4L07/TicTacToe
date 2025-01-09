@@ -1,4 +1,4 @@
-console.log("09/01/2025 12:30");
+console.log("09/01/2025 13:04");
 
 /**Variables */
 let playerSign = "N/A";
