@@ -1,4 +1,4 @@
-console.log("09/01/2025 13:04");
+console.log("14/01/2025 18.20");
 
 /**Variables */
 let activeSign = "N/A";
