@@ -4,7 +4,7 @@ console.log("14/01/2025 18.20");
 let activeSign = "N/A";
 let playerSign = "N/A";
 let comSign = "N/A"
-let board = [1,2,3,4,5,6,7,8,9];
+let board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
 
 /**Functions */
 function changeCells(activeSign) {
@@ -17,6 +17,14 @@ function changeCells(activeSign) {
         });
     });
 };
+
+function resetBoard()  {
+    board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+};
+
+function checkWin() {
+
+}
 
 /**Main Body */
 changeCells(activeSign);
